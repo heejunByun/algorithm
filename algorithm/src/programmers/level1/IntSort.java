@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * @DisplayName("정수 내림차순으로 배치하기")
  */
-public class intSort {
+public class IntSort {
     public static void main(String[] args) {
         long n = 118372;
         String str = String.valueOf(n);

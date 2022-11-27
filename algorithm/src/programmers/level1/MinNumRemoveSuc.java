@@ -1,6 +1,6 @@
 package programmers.level1;
 
-public class minNumRemoveSuc {
+public class MinNumRemoveSuc {
     /**
      * @DisplayName("제일 작은 수 제거하기")
      */

@@ -1,6 +1,6 @@
 package programmers.level1;
 
-public class collatz {
+public class Collatz {
 
     /**
      * @DisplayName("콜라츠 추측")

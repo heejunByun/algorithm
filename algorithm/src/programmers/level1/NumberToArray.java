@@ -3,7 +3,7 @@ package programmers.level1;
 /**
  * @DisplayName("자연수 뒤집어 배열로 만들기")
  */
-public class numberToArray {
+public class NumberToArray {
     public static void main(String[] args) {
         long n = 12345;
         String sn = Long.toString(n);

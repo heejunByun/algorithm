@@ -1,6 +1,6 @@
 package programmers.level1;
 
-public class hideOnPhoneNumber {
+public class HideOnPhoneNumber {
 
     /**
      * @DisplayName("핸드폰 번호 가리기")
