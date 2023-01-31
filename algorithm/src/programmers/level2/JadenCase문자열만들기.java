@@ -50,12 +50,12 @@ public class JadenCase문자열만들기{
                continue;
             }
 
-            sb.append(str.substring(0,1).toUpperCase());
-            sb.append(str.substring(1, str.length()));
+            sb.append(str.substring(0,1).toUpperCase()); //첫 문자
+            sb.append(str.substring(1, str.length())); //첫 문자부터 끝까지
             sb.append(" ");
         }
 
-        if(!" ".equals(s.substring(s.length() - 1, s.length()))) {
+        if(!" ".equals(s.substring(s.length() - 1, s.length()))) { //마지막 문자
             sb.deleteCharAt(sb.lastIndexOf(" "));
         }
 
