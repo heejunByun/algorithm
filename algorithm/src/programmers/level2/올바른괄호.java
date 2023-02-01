@@ -61,23 +61,21 @@ public class 올바른괄호 {
         // String s = "(()(";
         Stack<Character> ch = new Stack<>();
         boolean answer = true;
-        for (int i = 0; i < s.length(); i++) {
-            if ("(".equals(s.charAt(i))) {
+        for (int i = 0; i < s.length(); i++) { // 현재 (가 들어갈 자리면 스택에 넣는다.
+            //if ("(".equals(s.charAt(i))) { //equals 로 하니깐 오류가 발생함 char 는 아스키 코드로 인식되기 떄문에 '' 로 사용한다
+            if ('(' == s.charAt(i)) {
                 ch.push('(');
             } else {
-                if (ch.isEmpty()) {
+                if (ch.isEmpty()) {  // 현재 )가 들어갈 자리인데 스택이 비어있을경우 -> false
                     return false;
                 } else {
-                    ch.pop();
+                    ch.pop(); // 현재 )가 들어갈 상태에서 스택에 괄호('(')가 있는경우 -> pop
                 }
             }
         }
-        System.out.println("1 = " + 1);
         answer = (ch.isEmpty()) ? true : false;
-        System.out.println("2 = " + 2);
         System.out.println("answer = " + answer);
-
-        //System.out.println(s.length());
         return answer;
+
     }
 }
