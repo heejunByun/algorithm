@@ -38,12 +38,11 @@ public class JadenCase문자열만들기{
         */
 
         //Char 관련 문자 나올 때 StringBuilder 쓸 것
-
         StringBuilder sb = new StringBuilder();
         String[] arr = s.toLowerCase().split(" ");
         String answer = "";
         for (int i = 0; i < arr.length; i++) {
-            String str = arr[i];  
+            String str = arr[i];
 
             if (str.length() == 0) {
                sb.append(" ");
