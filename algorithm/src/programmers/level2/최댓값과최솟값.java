@@ -9,8 +9,8 @@ package programmers.level2;
 public class 최댓값과최솟값 {
 
     public static void main(String[] args) {
-        String s = "1 2 3 4";
-        // String s = "1 -2 3 4";
+//        String s = "1 2 3 4";
+         String s = "1 -2 3 4";
         solution(s);
     }
 
@@ -18,15 +18,16 @@ public class 최댓값과최솟값 {
         String answer = "";
         String[] arr = s.split(" ");
         int tempA = 0;
-        int tempB = 0;
-        int max = 0;
-        int min = 0;
+        int max, min;
+        max = Integer.parseInt(arr[0]);
+        min = Integer.parseInt(arr[0]);
         for (int i = 0; i < arr.length; i++) {
             tempA = Integer.parseInt(arr[i]);
-            for (int j = 1; j < arr.length - 1; j++) {
-                tempB = Integer.parseInt(arr[j]);
-                max = Math.max(tempA, tempB);
-                min = Math.min(tempA, tempB); //최소값을 이렇게 구하면 안됨
+            if (max < tempA) {
+                max = tempA;
+            }
+            if (min > tempA) {
+                min = tempA;
             }
         }
         System.out.println("max = " + max);
