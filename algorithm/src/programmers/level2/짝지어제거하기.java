@@ -34,35 +34,21 @@ import java.util.Stack;
 public class 짝지어제거하기 {
     // Stack 이나 Queue 로 풀어야할듯
     public static void main(String[] args) {
-        Stack<Integer> stack = new Stack<>();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        Integer peek = stack.peek();
-        System.out.println("peek = " + peek);
-        peek = stack.peek();
-        System.out.println("peek = " + peek);
-        peek = stack.peek();
-        System.out.println("peek = " + peek);
+        String s = "baabaa";
+        Stack<Character> stack = new Stack<Character>();
+        int answer = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (!stack.isEmpty() && stack.peek() == ch) { // 이전 값과 동일하면 해당 ch 값을 넣지않고, 이전값은 삭제 시킨다. (= 2개의 stack 이 처리가 되지 않는다.)
+                stack.pop();
+            } else {
+                stack.push(ch);
+            }
+            System.out.println("stack = " + stack);
+        }
 
-        Queue<Integer> queInt = new LinkedList<Integer>();
-        Queue<String> queStr = new LinkedList<String>();
-
-        queStr.add("A");
-        queStr.add("B");
-
-        String pk;
-
-        pk = queStr.peek();
-        System.out.println("pk = " + pk);
-        queStr.poll();
-
-        pk = queStr.peek();
-        System.out.println("pk = " + pk);
-        queStr.poll();
-
-        System.out.println("pk = " + pk);
-                
+        answer = stack.isEmpty() ? 1 : 0;
+        System.out.println("answer = " + answer);
 
     }
 }
