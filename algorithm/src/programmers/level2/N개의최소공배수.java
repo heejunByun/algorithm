@@ -20,6 +20,25 @@ public class N개의최소공배수 {
 
     public static int solution(int[] arr) {
         int answer = 0;
+        answer = arr[0];
+
+        for (int i = 1; i < arr.length; i++) {
+            int gcd = gcd(answer, arr[i]);
+            answer = answer * arr[i] / gcd; // answer 가 두 수의 비교하는 최소공배수가 된다.
+        }
+        System.out.println("answer = " + answer);
         return answer;
+    }
+
+    //최대공약수 구하는 함수 (유클리드 호제법)
+    public static int gcd(int a, int b){
+        int max = Math.max(a,b);
+        int min = Math.min(a,b);
+        while(min != 0){
+            int r = max % min;
+            max = min;
+            min = r;
+        }
+        return min;
     }
 }
