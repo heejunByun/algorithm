@@ -28,25 +28,13 @@ public class H_Index {
 
         Arrays.sort(citations); // 오름차순
 
-        // 내림차순부터 진행
-        int citaCnt = citations.length;
-        int a = 0;
-        for (int i = citations.length - 1; i >= 0; i--) {
-            // for 문 하나고 length 이용해야함
-            // for 문도 내림차순이 아닌 오름차순으로 해야함
-            // 0부터 큰 숫자별로
-            for (int j = 0; j < i; j++) { // 이거 아닌 거 같음
-                a = citations[i]; // 6 5 3 1 0
-                System.out.println("citations[i] = " + citations[i]);
-                System.out.println("citations[j] = " + citations[j]);
-                if (a < citations[j]) { // 자기자신보다 인용된 횟수가 클 경우
-
-                }
+        for (int i = 0; i < citations.length; i++) {
+            int h = citations.length - i;
+            if (h <= citations[i]) {
+                answer = h;
+                break;
             }
-            System.out.println("a = " + a);
-            //어렵다
         }
-
         return answer;
     }
 }

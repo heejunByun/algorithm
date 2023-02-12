@@ -15,7 +15,7 @@ public class 피보나치수 {
         if (n < 2) return n;
         //dp 핵심
         if (dp[n] != 0) return dp[n] % 1234567; // 이미 계산된 값이 있으면 바로 리턴을 해준다
-        dp[n]= (fibo(n - 1) + fibo(n - 2)) % 1234567; //DP & 재귀함수
+        dp[n] = (fibo(n - 1) + fibo(n - 2)) % 1234567; //DP & 재귀함수
         return dp[n];
     }
 
