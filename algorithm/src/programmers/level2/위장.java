@@ -62,8 +62,7 @@ public class 위장 {
             for (String s : map.keySet()) {
                 System.out.println("s = " + s);
                 System.out.println("map.get(s) = " + map.get(s));
-                answer = answer * (map.get(s) + 1);
-//                answer *= map.get(s) + 1;
+                answer = answer * (map.get(s) + 1); // answer *= map.get(s) + 1;
             }
             answer--;
         } else {
@@ -72,5 +71,11 @@ public class 위장 {
         System.out.println("answer = " + answer);
         return answer;
     }
+
+    /**
+     * 저도 딱 이렇게 풀었는데, 맨처음 시작을 1로 한 건 각 카테고리마다의 옷의 개수를 곱해줄거기 때문에 그런거에요.
+     * 카테고리마다 선택할 수 있는 경우의 수는 해당 옷의 개수 + 안입는 경우 하나 이므로 카테고리 당 옷의 개수 + 1을 곱해주고, 전부다 안 입는 경우를 마지막에 빼준거에요!
+     *
+     */
 }
 
