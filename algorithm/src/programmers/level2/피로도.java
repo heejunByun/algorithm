@@ -23,35 +23,32 @@ package programmers.level2;
  * 80	[[80,20],[50,40],[30,10]]	3
  */
 public class 피로도 {
-
-    private static boolean[] visited;
-    private static int answer = 0;
-
     public static void main(String[] args) {
-        solution(0,80, new int[][] {{80,20},{50,40},{30,10}});
-        System.out.println("answer tt = " + answer);
+       // solution(0, 80, new int[][]{{80, 20}, {50, 40}, {30, 10}});
+        Solution2 sol = new Solution2();
+        System.out.println("sol = " + sol.solution(80, new int[][] {{80, 20}, {50, 40}, {30, 10}}));
     }
+}
 
-    public static int solution(int count, int k, int[][] dungeons) {
-        visited = new boolean[dungeons.length];
-        // 완전탐색? dfs ?
-        // 재귀함수
-        // 조건 1. 이전에 방문하지 않은 곳이어야한다.
-        // 조건 2. 현재 피로도가 최소 필요 필요도 이상이어야한다.
-        for (int i = 0; i < dungeons.length; i++) {
-            System.out.println("visited[i] 방문여부 = " + visited[i]);
-            System.out.println("dungeons[i][0] 최소필요도 = " + dungeons[i][0]);
-            System.out.println("k 현재 피로도 = " + k);
-            if (!visited[i] && dungeons[i][0] <= k) { //방문한 적이 없고, 현재 필요도가 최소 필요도 보다 이상일 경우
-                // 방문
-                visited[i] = true;
-                solution(count + 1, k - dungeons[i][1], dungeons);
-                visited[i] = false;
-            }
-        }
-        answer = Math.max(answer, count);
-        System.out.println("answer = " + answer);
+//dfs 임
+class Solution2 {
+    //디버깅 다시 해볼 것
+    private int answer = 0;
+    private boolean[] visit;
+    public int solution(int k, int[][] dungeons) {
+        visit = new boolean[dungeons.length];
+        dfs(0, k, dungeons); //0은 depth, k 는 현재 피로도
         return answer;
     }
-
+    private void dfs(int depth, int k, int[][]dungeons){
+        for(int i = 0; i < dungeons.length; i++){
+            if(!visit[i] && dungeons[i][0] <= k){
+                visit[i] = true;
+                dfs(depth+1, k-dungeons[i][1], dungeons);
+                visit[i] = false;
+            }
+        }
+        System.out.println("answer = " + answer);
+        answer = Math.max(answer, depth);
+    }
 }
