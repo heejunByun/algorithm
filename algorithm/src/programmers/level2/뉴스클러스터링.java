@@ -1,6 +1,7 @@
 package programmers.level2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -44,15 +45,16 @@ public class 뉴스클러스터링 {
     public static void main(String[] args) {
         NewsCluster nc = new NewsCluster();
 //        System.out.println("nc.solution() 1 = " + nc.solution("FRANCE", "french"));
-        System.out.println("nc.solution() 2 = " + nc.solution("handshake" , "shake hands"));
+//        System.out.println("nc.solution() 2 = " + nc.solution("handshake" , "shake hands"));
 //        System.out.println("nc.solution() 3 = " + nc.solution("aa1+aa2", "AAAA12"));
-//        System.out.println("nc.solution() 4 = " + nc.solution("E=M*C^2" , "e=m*c^2"));
+        System.out.println("nc.solution() 4 = " + nc.solution("E=M*C^2" , "e=m*c^2"));
     }
 }
 
 class NewsCluster {
     public int solution(String str1 , String str2) {
         int answer = 0;
+        double jak = 0;
         //str1, str2 글자를 2개씩 잘라서 간직한다 (0,1) (1,2) (2,3) (3,4) .... 순으로
         //특수문자나 숫자가 있을경우, 그 글자는 저장되지 않는다. 모든 문자는 대문자로 치환
         //동일한 글자가 있을경우 교집합 영역에 저장 (동일한 글자도 조건이 있음) (중복포함)
@@ -62,6 +64,9 @@ class NewsCluster {
         str2 = str2.toUpperCase();
         List<String> strList1 = new ArrayList<>();
         List<String> strList2 = new ArrayList<>();
+
+        List<String> kyo = new ArrayList<>();
+        List<String> hab = new ArrayList<>();
 
         for (int i = 1; i < str1.length(); i++) {
             String check = String.valueOf(str1.charAt(i - 1)) + String.valueOf(str1.charAt(i));
@@ -75,6 +80,26 @@ class NewsCluster {
         }
         System.out.println("strList1 = " + strList1);
         System.out.println("strList2 = " + strList2);
+
+        Collections.sort(strList1);
+        Collections.sort(strList2);
+
+        for (String s : strList1) {
+            if (strList2.remove(s)) {
+                kyo.add(s);
+            }
+            hab.add(s);
+        }
+
+        for (String s : strList2) {
+            hab.add(s);
+        }
+        if (hab.size() == 0) jak = 1;
+        else jak = (double) kyo.size() / (double) hab.size();
+        answer = (int) Math.floor(jak * 65536);
+        System.out.println("answer = " + answer);
+        System.out.println("kyo = " + kyo);
+        System.out.println("hab = " + hab);
 
         return answer;
     }
