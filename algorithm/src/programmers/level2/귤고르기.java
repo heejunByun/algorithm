@@ -1,9 +1,6 @@
 package programmers.level2;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * 경화는 과수원에서 귤을 수확했습니다. 경화는 수확한 귤 중 'k'개를 골라 상자 하나에 담아 판매하려고 합니다.
@@ -52,13 +49,12 @@ public class 귤고르기 {
                 else return -1;
             }
         });
-        //위와 아래가 동일한 코드라고 함
+        // 위와 아래가 동일한 코드라고 함
         // keyList.sort((a1, a2) -> map.get(a2) - map.get(a1)); //내림차순
         // keyList.sort((a1, a2) -> map.get(a1) - map.get(a2)); //오름차순
         for (Integer a : keyList) {
             System.out.println("aaaa = " + a);
         }
-
         int i = 0;
         while (k > 0) {
             System.out.println("k = " + k);

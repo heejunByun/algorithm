@@ -28,7 +28,6 @@ public class 숫자문자열과영단어 {
                 System.out.println("key = " + key);
                 s = s.replace(key, String.valueOf(map.get(key)));
             }
-            ;
         }
         answer = Integer.parseInt(s);
 
