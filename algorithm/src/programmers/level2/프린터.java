@@ -1,5 +1,6 @@
 package programmers.level2;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -46,24 +47,93 @@ public class 프린터 {
 class printSol {
     public int solution(int[] priorities, int location) {
         int answer = 0;
-        //스택 큐 문제라고 함
-        //stack : LIFO
-        //queue : FIFO
-        Stack<Integer> stack = new Stack<>();
         Queue<Integer> queue = new LinkedList<>();
-        Queue<Integer> queue2 = new LinkedList<>();
-
-        for (int i : priorities) {
-            queue.add(i);
+        for (int i = 0; i < priorities.length; i++) {
+            queue.offer(priorities[i]); // 우선순위 큐에 모든 요소를 넣음
         }
-        int first = queue.poll(); //처음에 들어간 숫자 뽑기
-        System.out.println("first = " + first);
-        for (int i = 0; i < queue.size(); i++) {
-            int temp = queue.peek(); // pull 로 해야하지않나? 다시 풀어볼 것
-            if (first < temp) {
+        Arrays.sort(priorities); // 우선순위를 기준으로 오름차순 정렬
+
+        int idx = priorities.length - 1; // 우선순위가 가장 높은 문서의 인덱스
+        while (!queue.isEmpty()) {
+            int curr = queue.poll(); // 가장 앞에 있는 요소를 꺼냄
+            if (curr == priorities[idx]) { // 우선순위가 가장 높은 문서를 발견한 경우
+                idx--; // 다음으로 우선순위가 높은 문서를 찾기 위해 인덱스를 감소시킴
+                answer++; // 출력된 문서의 수를 증가시킴
+                if (location == 0) { // 내가 요청한 문서인 경우 반복문을 종료하고 출력된 문서의 수를 반환
+                    break;
+                } else {
+                    location--; // 내가 요청한 문서가 아닌 경우 다음 문서로 이동
+                }
+            } else {
+                queue.offer(curr); // 우선순위가 낮은 문서인 경우 큐의 가장 뒤에 추가
+                if (location == 0) { // 내가 요청한 문서의 위치가 변경됨
+                    location = queue.size() - 1; // 큐의 가장 뒤쪽으로 이동
+                } else {
+                    location--; // 내가 요청한 문서가 아닌 경우 다음 문서로 이동
+                }
+            }
+        }
+        return answer;
+    }
+}
+
+class SolutionTest {
+    // 블럭이 움직이지 않도록 접착시키는 메서드
+    private void stick(int[][] map, int x, int y) {
+        // 상하좌우를 체크하여 1인 블럭들을 2로 변경
+        int[] dx = {-1, 1, 0, 0};
+        int[] dy = {0, 0, -1, 1};
+
+        for (int i = 0; i < 4; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+
+            // 배열의 범위를 벗어나거나 이미 접착된 블럭일 경우 continue
+            if (nx < 0 || ny < 0 || nx >= map.length || ny >= map[0].length || map[nx][ny] == 2) {
+                continue;
+            }
+
+            // 상하좌우 중 1인 블럭을 2로 변경하고 해당 블럭을 기준으로 재귀호출
+            if (map[nx][ny] == 1) {
+                map[nx][ny] = 2;
+                stick(map, nx, ny);
+            }
+        }
+    }
+
+    public int[][] solution(int[][] map) {
+        int n = map.length; // 배열의 세로 길이
+        int m = map[0].length; // 배열의 가로 길이
+
+        // 매 초마다 블럭이 아래로 떨어지는 작업
+        for (int j = 0; j < m; j++) {
+            for (int i = n - 1; i >= 0; i--) {
+                // 1인 블럭일 경우
+                if (map[i][j] == 1) {
+                    int k = i;
+                    // 아래쪽으로 1이 아닌 블럭이나 배열의 끝까지 이동
+                    while (k < n - 1 && map[k+1][j] == 0) {
+                        k++;
+                    }
+                    // 해당 블럭이 배열의 끝까지 이동한 경우
+                    if (k == n - 1) {
+                        map[i][j] = 0;
+                        continue;
+                    }
+                    // 해당 블럭이 이동한 위치에 2인 블럭이 있는 경우
+                    if (map[k+1][j] == 2) {
+                        // 해당 블럭을 2로 변경하고 이동한 위치로 재귀호출하여 접착시키기
+                        map[i][j] = 2;
+                        stick(map, k+1, j);
+                    } else {
+                        // 이동한 위치에 빈 공간이 있을 경우 해당 블럭을 이동시키기
+                        map[k][j] = map[i][j];
+                        map[i][j] = 0;
+                    }
+                }
             }
         }
 
-        return answer;
+        return map;
     }
 }
